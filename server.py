@@ -15,7 +15,7 @@ def index():
 def control():
     #print("screen got hit")
     print("request GET")
-    file = open("header_builder.html", "r")
+    file = open("control.html", "r")
     html = file.read()
 
     Penable= str(request.args.get('P__' , ""))

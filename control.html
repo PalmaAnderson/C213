@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v4.1.1">
+  <title>C213</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/jumbotron/">
+
+  <!-- Bootstrap core CSS -->
+  <link href="/static/bootstrap.min.css" rel="stylesheet">
+  <script src="/static/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="/static/jquery-3.5.1.slim.min.js"><\/script>')</script>
+  <script src="/static/bootstrap.bundle.min.js"></script>
+  <!-- Custom styles for this template -->
+  <link href="/static/jumbotron.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <style>
+    .vl {
+      /* border-left: 6px solid darkslategrey; */
+      border-left: 8px solid rgb(52, 58, 64);
+      height: 560px;
+      position: absolute;
+      left: 50%;
+      margin-left: -3px;
+      top: 0;
+    }
+  </style>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      /* background-color: #dddddd; */
+    }
+
+    .darkgraybackground {
+      background-color: rgb(55, 60, 65);
+    }
+
+    .mediumgraybackground {
+      background-color: rgb(100, 105, 110);
+    }
+
+    .lightgraybackground {
+      background-color: rgb(160, 170, 180);
+    }
+
+    .white {
+      color: #ffffff;
+    }
+
+    .progress {
+      transform: rotate(-90deg);
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <!--<a class="navbar-brand" href="#">Tournament Life Indicator</a> -->
+    <a class="navbar-brand" href="./"><img src="/static/logo-gray.png" alt="logo" width="50%" height="50%"> </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#"> Sistemas de Controle <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <!-- <a class="nav-link" href="/prolabs"> C213 </a> -->
+        </li>
+        <li class="nav-item">
+          <!-- <a class="nav-link" href="/nscreen"> Tournament </a> -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"> How to use</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Membros</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="#">Anderson Andre Palma</a>
+            <a class="dropdown-item" href="#">Mariana Helena Ines Moreira</a>
+            <a class="dropdown-item" href="#">Sinara Pimenta Medeiros</a>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+
+  <main role="main">
+    <div class="container">
+      <div class="row" div style="text-align: center;">
+
+        <div class="col-xl-2 align-center">
+          <br>
+          <form method="GET" action="/control/">
+            <!--
+            <div class="text-left">
+              <div class="radio">
+                <label><input type="radio" name="optradio" checked>Controle P</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" name="optradio">Controle PI</label>
+              </div>
+              <div class="radio disabled">
+                <label><input type="radio" name="optradio" disabled>Controle PID</label>
+              </div>
+            </div>
+          -->
+            <h4 class="text-center">Constantes</h4>
+            <div class="form-group">
+
+              A1:<input type="text" class="form-control" name="A1" placeholder="0.9930900">
+              B1:<input type="text" class="form-control" name="B1" placeholder="0.0058096">
+              Setpoint:<input type="text" class="form-control" name="SetPoint" placeholder="50">
+
+              Proporcional:<input type="text" class="form-control" name="Proporcional" placeholder="1">
+              Integral:<input type="text" class="form-control" name="Integral" placeholder="1">
+              Derivativo:<input type="text" class="form-control" name="Derivativo" placeholder="1">
+
+
+            </div>
+            <div style="text-align: center;">
+              <h4 class="text-center">Modo</h4>
+
+              <div class=".container">
+                <div class=".btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-primary darkgraybackground">
+                    <input type="radio" name="P__" id="P"> P &ThickSpace;&ThickSpace;
+                  </label>
+                  <label class="btn btn-primary mediumgraybackground">
+                    <input type="radio" name="PI_" id="PI"> PI &ThickSpace;
+                  </label>
+                  <label class="btn btn-primary lightgraybackground">
+                    <input type="radio" name="PID" id="PID"> PID
+                  </label>
+                </div>
+              </div>
+              <br>
+              <!-- <button type="submit" class="btn btn-primary" onclick="show_graph()" >Run</button> -->
+              <div class=".container">
+                <input type="submit" class="text-center btn btn-primary" value="Calcular">
+                <button type="button" onclick="goBack()" class="btn btn-outline-danger">Voltar</button>
+              </div>
+              <script>
+                function goBack() {
+                  window.history.back();
+                }
+              </script>
+
+              <!-- <button type="button" class="text-center btn btn-primary" onclick="show_graph()">Simular</button> -->
+            </div>
+
+          </form>
+
+        </div>
+
+        <div class="col-md-1">
+          <!-- <div class="vl"></div> -->
+        </div>
+
+        <div class="col-xl-7">
+          <br>
+          <h4 class="text-center">Resultado</h4>
+          <img src="/tmp/Results.png">
+
+        </div>
+
+        <div class="col-xl-2  ">
+
+          <br><br><br><br><br>yyyy
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <footer class=".container">
+      <!-- <hr style="height:8px;border-width:0;color: rgb(52, 58, 64);background-color: rgb(52, 58, 64)"> -->
+      <p class="text-center fixed-bottom">&copy; ASM Sistemas de Controle </p>
+    </footer>
+
+</html>
