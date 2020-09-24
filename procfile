@@ -1,2 +1,2 @@
-web: gunicorn app:app
+Web: gunicorn app:app
 ps:scale web=1
