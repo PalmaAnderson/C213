@@ -98,7 +98,7 @@ def plot(modo,a1,b1,sp,p,i,d):
     ax.set(xlabel='Amostras', ylabel='Valores', title=titulo)
     ax.grid()
     #plt.show()
-    fig.savefig("static/Results.png")
+    fig.savefig("./static/Results.png")
 
     
     Html=create_table(modo,a1,b1,sp,p,i,d,pico)
