@@ -1,4 +1,4 @@
-from flask import Flask,request
+from flask import Flask,request,send_from_directory
 import os
 #https://matplotlib.org/tutorials/text/text_intro.html#sphx-glr-tutorials-text-text-intro-py
 #
@@ -67,6 +67,9 @@ def control():
     return html 
 
  
+@app.route('/tmp/<path:path>')
+def send_js(path):
+    return send_from_directory('tmp', path)
 
 if __name__ == '__main__':
   app.run(debug=True)
