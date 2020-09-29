@@ -3,18 +3,20 @@ import os
 #https://matplotlib.org/tutorials/text/text_intro.html#sphx-glr-tutorials-text-text-intro-py
 #
 #https://getbootstrap.com/docs/4.5/layout/grid/
+#
+#https://flask.palletsprojects.com/en/1.1.x/quickstart/#accessing-request-data
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 
 
 @app.route('/')
 def index():
-  return "<h2> Main </h2>"
+  return '<h2>Main</h2> <br> redirecting to /control... <meta http-equiv = "refresh" content = "2; url = /control/" />'
 
 @app.route('/control/')
 def control():
     #print("screen got hit")
-    print("request GET")
+    #print("request GET")
     file = open("control.html", "r")
     html = file.read()
 
@@ -52,10 +54,9 @@ def control():
     if d=="":
         d = 1
     
-    
-    
-
-    print(">>>> ",modo,a1,b1,sp,p,i,d," <<<<")
+    print (request.headers)
+    #print( app.Request.user_agent)
+    print("EQ  [",a1,b1,"]\nVAR [",modo,sp,p,i,d,"]")
 
     #print (request.args)
     #import  prolabs_flask
@@ -63,12 +64,12 @@ def control():
     import plot3trab
     aaa=plot3trab.plot(modo,float(a1),float(b1),float(sp),float(p),float(i),float(d))
     html=html.replace("yyyy",aaa)
-    print("runned")
+    print("now sending...")
     return html 
 
  
 @app.route('/tmp/<path:path>')
-def send_js(path):
+def send_file(path):
     return send_from_directory('tmp', path)
 
 if __name__ == '__main__':
