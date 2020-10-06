@@ -26,11 +26,16 @@ def control():
 
     a1 = str(request.args.get('A1' , "" ))
     b1 = str(request.args.get('B1' , ""))
+    ts = str(request.args.get('Amostragem' , ""))
 
     sp= str(request.args.get('SetPoint'      , ""))
     p = str(request.args.get('Proporcional'  , ""))
     i = str(request.args.get('Integral'      , ""))
     d = str(request.args.get('Derivativo'    , ""))
+
+    fs = str(request.args.get('fixed_scale'    , ""))
+    
+    ps = str(request.args.get('plot_sample'    , ""))
 
     modo=""
     if Denable:
@@ -38,32 +43,43 @@ def control():
     else:
         if Ienable:
             modo="PI"
+            d = 0
         else:
             modo="P"
+            d = 0
+            i = 0
 
     if a1=="":
         a1=0.9930900
     if b1=="":
         b1 = 0.0058096
+    if ts=="":
+        ts=0.3
     if sp=="":
         sp = 50
     if p=="":
-        p = 1
+        p = 0
     if i=="":
-        i = 1
+        i = 0
     if d=="":
-        d = 1
+        d = 0
+    if fs=="":
+        fs=0
+    if ps=="":
+        ps=0
+
+    
     
     print (request.headers)
     #print( app.Request.user_agent)
-    print("EQ  [",a1,b1,"]\nVAR [",modo,sp,p,i,d,"]")
+    print("EQ  [",a1,b1,ts,"]\nVAR [",modo,sp,p,i,d,fs,ps,"]")
 
     #print (request.args)
     #import  prolabs_flask
     #resp=resp+str(prolabs_flask.main(0,p9))
     import plot3trab
-    aaa=plot3trab.plot(modo,float(a1),float(b1),float(sp),float(p),float(i),float(d))
-    html=html.replace("yyyy",aaa)
+    retorno=plot3trab.plot(modo,float(a1),float(b1),float(ts),float(sp),float(p),float(i),float(d),int(fs),int(ps))
+    html=html.replace("table_placeholder",retorno)
     print("now sending...")
     return html 
 

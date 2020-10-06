@@ -150,28 +150,38 @@
 
               A1:<input type="text" class="form-control" name="A1" placeholder="0.9930900">
               B1:<input type="text" class="form-control" name="B1" placeholder="0.0058096">
+
+              Tempo Amostragem:<input type="text" class="form-control" name="Amostragem" placeholder="0.3">
               Setpoint:<input type="text" class="form-control" name="SetPoint" placeholder="50">
 
-              Proporcional:<input type="text" class="form-control" name="Proporcional" placeholder="1">
-              Integral:<input type="text" class="form-control" name="Integral" placeholder="1">
-              Derivativo:<input type="text" class="form-control" name="Derivativo" placeholder="1">
+              Ganho Proporcional:<input type="text" class="form-control" name="Proporcional" placeholder="0">
+              Ganho Integral:<input type="text" class="form-control" name="Integral" placeholder="0">
+              Ganho Derivativo:<input type="text" class="form-control" name="Derivativo" placeholder="0">
 
 
-            </div>
-            <div style="text-align: center;">
-              <h4 class="text-center">Modo</h4>
+              <div style="text-align: center;">
+                <h4 class="text-center">Modo</h4>
 
-              <div class=".container">
-                <div class=".btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-primary darkgraybackground">
-                    <input type="radio" name="P__" id="P"> P &ThickSpace;&ThickSpace;
-                  </label>
-                  <label class="btn btn-primary mediumgraybackground">
-                    <input type="radio" name="PI_" id="PI"> PI &ThickSpace;
-                  </label>
-                  <label class="btn btn-primary lightgraybackground">
-                    <input type="radio" name="PID" id="PID"> PID
-                  </label>
+                <div class=".container">
+                  <div class=".btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary darkgraybackground">
+                      <input type="radio" name="P__" id="P"> P &ThickSpace;&ThickSpace;
+                    </label>
+                    <label class="btn btn-primary mediumgraybackground">
+                      <input type="radio" name="PI_" id="PI"> PI &ThickSpace;
+                    </label>
+                    <label class="btn btn-primary lightgraybackground">
+                      <input type="radio" name="PID" id="PID"> PID
+
+                    </label>
+                  </div>
+
+                  <input class="form-check-input" type="checkbox" value="1" name="fixed_scale" id="fixed_scale" checked>
+                  <label class="form-check-label" for="fixed_scale"> Escala Fixa</label>
+                  <br>
+                  <input class="form-check-input" type="checkbox" value="1" name="plot_sample" id="plot_sample">
+                  <label class="form-check-label" for="plot_sample"> Exibir Amostras</label>
+
                 </div>
               </div>
               <br>
@@ -205,8 +215,7 @@
         </div>
 
         <div class="col-xl-2  ">
-
-          <br><br><br><br><br>yyyy
+          <br><br><br><br><br>table_placeholder
         </div>
       </div>
     </div>
@@ -214,7 +223,7 @@
 
     <footer class=".container">
       <!-- <hr style="height:8px;border-width:0;color: rgb(52, 58, 64);background-color: rgb(52, 58, 64)"> -->
-      <p class="text-center">&copy; ASM Sistemas de Controle (build 20200929-1722)</p>
+      <p class="text-center">&copy; ASM Sistemas de Controle (build 20201006 - 1204)</p>
     </footer>
 
 </html>
