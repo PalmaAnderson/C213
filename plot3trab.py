@@ -6,26 +6,17 @@ import numpy as np
 
 def create_table(modo, a1, b1, sp, p, i, d, pico, overshoot, tempo_acomodacao):
     Html = "<table>"
-    Html = Html+"<tr><th>     Param.  </th>    <th>Valor                   </th></tr>"
-    Html = Html+"<tr><td>     Modo    </th>    <td>"+modo + "             </td></tr>"
-    Html = Html+"<tr><td>     A1      </td>    <td>" + \
-        str(a1)+"             </td></tr>"
-    Html = Html+"<tr><td>     B1      </td>    <td>" + \
-        str(b1)+"             </td></tr>"
-    Html = Html+"<tr><td>     SP      </td>    <td>" + \
-        str(sp)+"             </td></tr>"
-    Html = Html+"<tr><td>     P       </td>    <td>" + \
-        str(p)+"              </td></tr>"
-    Html = Html+"<tr><td>     I       </td>    <td>" + \
-        str(i)+"              </td></tr>"
-    Html = Html+"<tr><td>     D       </td>    <td>" + \
-        str(d)+"              </td></tr>"
-    Html = Html+"<tr><td>     Pico    </td>    <td>" + \
-        str(round(pico, 2))+"        </td></tr>"
-    Html = Html+'<tr><td>     Overshoot        </td><td class="text-success">' + \
-        str(round(overshoot, 2))+"  </td></tr>"
-    Html = Html+'<tr><td>     TS      </td><td class="text-danger">' + \
-        str(round(tempo_acomodacao, 2))+"  </td></tr>"
+    Html = Html+"<tr><th>     Param.  </th>    <th>Valor                     </th></tr>"
+    Html = Html+"<tr><td>     Modo    </th>    <td>" + modo +  "             </td></tr>"
+    Html = Html+"<tr><td>     A1      </td>    <td>" + str(a1)+"             </td></tr>"
+    Html = Html+"<tr><td>     B1      </td>    <td>" + str(b1)+"             </td></tr>"
+    Html = Html+"<tr><td>     SP      </td>    <td>" + str(sp)+"             </td></tr>"
+    Html = Html+"<tr><td>     P       </td>    <td>" + str(p)+"              </td></tr>"
+    Html = Html+"<tr><td>     I       </td>    <td>" + str(i)+"              </td></tr>"
+    Html = Html+"<tr><td>     D       </td>    <td>" + str(d)+"              </td></tr>"
+    Html = Html+"<tr><td>     Pico    </td>    <td>" + str(round(pico, 2))+"        </td></tr>"
+    Html = Html+'<tr><td>     Overshoot        </td><td class="text-success">' + str(round(overshoot, 2))+"  </td></tr>"
+    Html = Html+'<tr><td>     TS      </td><td class="text-danger">' + str(round(tempo_acomodacao, 2))+"  </td></tr>"
     Html = Html+"</table>"
     # <p class="text-success">.text-success</p>
     # vc nao esta vendo errado, isto eh exatamente oque vc pensa que eh
