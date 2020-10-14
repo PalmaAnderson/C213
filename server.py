@@ -43,6 +43,9 @@ def control():
 
     fs = str(request.args.get('fixed_scale'    , ""))
     ps = str(request.args.get('plot_sample'    , ""))
+    
+    k = str(request.args.get('k'    , ""))
+    tal = str(request.args.get('tal'    , ""))
 
     #Atualmente tudo roda como PID
     """
@@ -71,20 +74,33 @@ def control():
         sp = 50
     if p=="":
         p = 0
-    if p=="P":
+    if p=="kp":
         p=0
     if i=="":
-       i = 0
-    if i=="I":
-       i = 0
+        i = 0
+    if i=="ki":
+        i = 0
     if d=="":
         d = 0
-    if d=="D":
+    if d=="kd":
         d = 0
     if fs=="":
         fs=0
     if ps=="":
         ps=0
+    if k=="":
+        k=0
+    if k=="k":
+        k=0
+    if tal=="":
+        tal=0
+    if tal=="tal":
+        tal=0
+    if os=="":
+        os=0
+    if tm=="":
+        tm=60
+        
 
     html= Avaliar(a1,"0.9930900",html)
     html= Avaliar(b1,"0.0058096",html)
@@ -92,11 +108,11 @@ def control():
     html= Avaliar(sp,"50",html)
 
     if p!=0:
-        html= Avaliar(p,"P",html)
+        html= Avaliar(p,"kp",html)
     if i!=0:
-        html= Avaliar(i,"I",html)
+        html= Avaliar(i,"ki",html)
     if d!=0:
-        html= Avaliar(d,"D",html)
+        html= Avaliar(d,"kd",html)
    
    
     
@@ -105,7 +121,7 @@ def control():
     print("EQ  [",a1,b1,ts,"]\nVAR [",modo,sp,p,i,d,fs,ps,"]")
 
     import plot3trab
-    retorno,timestamp=plot3trab.plot(modo,float(a1),float(b1),float(ts),float(sp),float(p),float(i),float(d),int(fs),int(ps))
+    retorno,timestamp=plot3trab.plot(modo,float(a1),float(b1),float(ts),float(sp),float(p),float(i),float(d),int(fs),int(ps),float(os),float(tm),float(k),float(tal))
     html=html.replace("table_placeholder",retorno)
     html=html.replace("Results.png",("Results"+timestamp+".png"))
     
