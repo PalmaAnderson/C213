@@ -43,6 +43,7 @@ def control():
 
     fs = str(request.args.get('fixed_scale'    , ""))
     ps = str(request.args.get('plot_sample'    , ""))
+    pa = str(request.args.get('plot_all'    , ""))
     
     k = str(request.args.get('k'    , ""))
     tal = str(request.args.get('tal'    , ""))
@@ -88,6 +89,8 @@ def control():
         fs=0
     if ps=="":
         ps=0
+    if pa=="":
+        pa=0
     if k=="":
         k=0
     if k=="k":
@@ -121,7 +124,8 @@ def control():
     print("EQ  [",a1,b1,ts,"]\nVAR [",modo,sp,p,i,d,fs,ps,"]")
 
     import plot3trab
-    retorno,timestamp=plot3trab.plot(modo,float(a1),float(b1),float(ts),float(sp),float(p),float(i),float(d),int(fs),int(ps),float(os),float(tm),float(k),float(tal))
+    retorno,timestamp=plot3trab.plot(modo,float(a1),float(b1),float(ts),float(sp),
+ float(p),float(i),float(d),int(fs),int(ps),int(pa),float(os),float(tm),float(k),float(tal))
     html=html.replace("table_placeholder",retorno)
     html=html.replace("Results.png",("Results"+timestamp+".png"))
     

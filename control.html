@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
@@ -109,7 +110,10 @@
     }
 
     .form-control {
-      height: 30px;
+      height: 25px;
+    }
+    #label-kp, #label-ki, #label-kd, #label-k,#label-tal, #input-kp, #input-ki, #input-kd,#input-k,#input-tal{
+      display: none;
     }
   </style>
 
@@ -173,7 +177,69 @@
               </div>
             </div>
           -->
-            <h5 class="text-center">Parametros</h5>
+          <h5 class="text-center">Modo:</h5>
+          <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
+
+            <label class="btn btn-primary c1 btn-sm">
+              <input type="radio" name="Modo" value="MA" id="MA" onclick="handleClickM();">MA
+            </label>
+
+
+            <label class="btn btn-primary  c2 btn-sm">
+              <input type="radio" name="Modo" value="MF" id="MF" onclick="handleClickM();"> MF
+            </label>
+
+
+            <label class="btn btn-primary  c5 btn-sm">
+              <input type="radio" name="Modo" value="PID" id="PID" onclick="handleClickPID();"> PID
+            </label>
+            </br>
+            <label class="btn btn-primary c6 btn-sm">
+              <input type="radio" name="Modo" value="Sint" id="Sint" onclick="handleClickSint();"> Sint
+            </label>
+
+            <script>
+              function handleClickM() {
+                document.getElementById("label-kp").style.display = "none";
+                document.getElementById("label-ki").style.display = "none";
+                document.getElementById("label-kd").style.display = "none";
+                document.getElementById("input-kp").style.display = "none";
+                document.getElementById("input-ki").style.display = "none";
+                document.getElementById("input-kd").style.display = "none";
+                document.getElementById("label-k").style.display = "none";
+                document.getElementById("label-tal").style.display = "none";
+                document.getElementById("input-k").style.display = "none";
+                document.getElementById("input-tal").style.display = "none";
+              }
+              function handleClickPID() {
+                document.getElementById("label-kp").style.display = "block";
+                document.getElementById("label-ki").style.display = "block";
+                document.getElementById("label-kd").style.display = "block";
+                document.getElementById("input-kp").style.display = "block";
+                document.getElementById("input-ki").style.display = "block";
+                document.getElementById("input-kd").style.display = "block";
+                document.getElementById("label-k").style.display = "none";
+                document.getElementById("label-tal").style.display = "none";
+                document.getElementById("input-k").style.display = "none";
+                document.getElementById("input-tal").style.display = "none";
+              }
+              function handleClickSint() {
+                document.getElementById("label-k").style.display = "block";
+                document.getElementById("label-tal").style.display = "block";
+                document.getElementById("input-k").style.display = "block";
+                document.getElementById("input-tal").style.display = "block";
+
+                document.getElementById("label-kp").style.display = "none";
+                document.getElementById("label-ki").style.display = "none";
+                document.getElementById("label-kd").style.display = "none";
+                document.getElementById("input-kp").style.display = "none";
+                document.getElementById("input-ki").style.display = "none";
+                document.getElementById("input-kd").style.display = "none";
+
+              }
+            </script>
+
+          </div>
             <div class="form-group">
 
               A1:<input type="text" class="form-control" name="A1" value="0.9930900">
@@ -187,55 +253,31 @@
               <!-- Ganho Proporcional:<input type="text" class="form-control" name="Proporcional" placeholder="0"> -->
               <!-- Ganho Integral:<input type="text" class="form-control" name="Integral" placeholder="0"> -->
               <!-- Ganho Derivativo:<input type="text" class="form-control" name="Derivativo" placeholder="0"> -->
+              <label id="label-kp" >KP:</label>
+              <input type="text" id="input-kp" class="form-control" name="Proporcional" value="kp">
+              <label id="label-ki" >KI:</label>
+              <input type="text" id="input-ki" class="form-control" name="Integral" value="ki">
+              <label id="label-kd" >KD:</label>
+              <input type="text" id="input-kd" class="form-control" name="Derivativo" value="kd">
+            
+              <label id="label-k" >K:</label>
+              <input type="text" id="input-k" class="form-control" name="k" value="k">
+              <label id="label-tal" >Tal:</label>
+              <input type="text" id="input-tal" class="form-control" name="tal" value="tal">
 
 
               <div style="text-align: center;">
                 <!-- <h4 class="text-center">Modo</h4> -->
-                Modo:
                 <div class=".container">
-                  <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
-
-                    <label class="btn btn-primary c1 btn-sm">
-                      <input type="radio" name="Modo" value="MA" id="MA">MA
-                    </label>
-
-
-                    <label class="btn btn-primary  c2 btn-sm">
-                      <input type="radio" name="Modo" value="MF" id="MF"> MF
-                    </label>
-
-
-                    <label class="btn btn-primary  c5 btn-sm">
-                      <input type="radio" name="Modo" value="PID" id="PID"> PID
-                    </label>
-                    </br>
-                    <label class="btn btn-primary c6 btn-sm">
-                      <input type="radio" name="Modo" value="Sint" id="Sint"> Sint
-                    </label>
-
-
-                  </div>
                   
-                  <br> Ganhos:
-                  <div class="input-group mb-3">
-
-                    <input type="text" class="form-control" name="Proporcional" value="kp">
-                    <input type="text" class="form-control" name="Integral" value="ki">
-                    <input type="text" class="form-control" name="Derivativo" value="kd">
-                  </div>
-
-                  Dados da sintonia:
-                  <div class="input-group mb-3">
-
-                    <input type="text" class="form-control" name="k" value="k">
-                    <input type="text" class="form-control" name="tal" value="tal">
-                  </div>
-
+                  
+                  
 
 
                 </div>
               </div>
               <!-- <button type="submit" class="btn btn-primary" onclick="show_graph()" >Run</button> -->
+            </br>
               <div class=".container">
                 <input type="submit" class="text-center btn btn-primary" value="Calcular">
                 <button type="button" onclick="goBack()" class="btn btn-outline-danger">Voltar</button>
@@ -266,7 +308,9 @@
           <label class="form-check-label" for="fixed_scale"> Escala Fixa
             &ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;</label>
           <input class="form-check-input" type="checkbox" value="1" name="plot_sample" id="plot_sample">
-          <label class="form-check-label" for="plot_sample"> Exibir Amostras</label>
+          <label class="form-check-label" for="plot_sample"> Exibir Amostras  &ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;</label>
+          <input class="form-check-input" type="checkbox" value="1" name="plot_all" id="plot_all">
+          <label class="form-check-label" for="plot_all"> Comparar Modos </label>
 
         </div>
         </form>

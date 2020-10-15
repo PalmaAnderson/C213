@@ -3,8 +3,7 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 import re
-import cmath
-import math
+import calculos
 
 
 def create_table(modo, a1, b1, sp, p, i, d, pico,os, overshoot,tm, tempo_acomodacao):
@@ -32,23 +31,7 @@ def create_table(modo, a1, b1, sp, p, i, d, pico,os, overshoot,tm, tempo_acomoda
     # vc nao esta vendo errado, isto eh exatamente oque vc pensa que eh
     return Html
 
-def sintonia(mp,ts,k,tal):
-    mp = mp/100
-    csi=math.sqrt((math.pow(((math.log(mp))/math.pi),2))/(1+(math.pow(((math.log(mp))/math.pi),2))))
-    wn=4/(csi*ts)
-    wcg=wn;
-    MF=2*math.degrees(math.asin(csi));
-    G=k/(complex(1,(tal*wcg)));
-    modG=abs(G);
-    faseG=math.degrees(cmath.phase(G));
-    modC=1/modG;
-    faseC=-180+MF-faseG;
-    Kp=math.sqrt((math.pow(modC,2))/(1+math.pow((math.tan(math.radians(faseC))*(-1)),2)))
-    Ki=math.tan(math.radians(faseC))*(-1)*(wcg)*Kp
-    
-    return round(Kp,4),round(Ki,4)
-
-def plot(modo, a1, b1, ts, sp, kp, ki, kd, fs, ps, os,tm,k,tal):
+def plot(modo, a1, b1, ts, sp, kp, ki, kd, fs, ps, pa, os,tm,k,tal):
     samples = []
     ref_arquivo = open("samples.txt","r")
     linhas = ref_arquivo.readlines()
@@ -57,34 +40,41 @@ def plot(modo, a1, b1, ts, sp, kp, ki, kd, fs, ps, os,tm,k,tal):
         linhas[i] = float(linhas[i])
         samples.append(linhas[i])
     pv = 0
+    pvMA = 0
+    pvMF = 0
     tempo = 0
     vetY = []
+    vetYMA = []
+    vetYMF = []
     vetT = []
     acaoIntegral = 0
     erroAnterior = sp-pv
     tempo_acomodacao = 0
     tempo_analise = 347.1
     if(modo=="Sint"):
-        kp,ki = sintonia (os,tm,k,tal) 
+        kp,ki = calculos.sintonia (os,tm,k,tal)
+    if(pa):
+        modo="Comparação"
     
     while (tempo < tempo_analise):
         vetY.append(pv)
         vetT.append(tempo)
-        if(modo=="MA"):
-             pv = a1*pv+ b1*sp
+        #MODOS:
+        if(modo=="Comparação"):
+            vetYMA.append(pvMA);
+            vetYMF.append(pvMF);
+            pvMA = calculos.malha_aberta(sp,pvMA,a1,b1)
+            pvMF = calculos.malha_fechada(sp,pvMF,a1,b1)
+            pv,acaoIntegral,erroAnterior = calculos.pid(sp,pv,a1,b1,kp,ki,kd,ts,acaoIntegral,erroAnterior)
+        elif(modo=="MA"):
+            pv = calculos.malha_aberta(sp,pv,a1,b1)
         elif(modo=="MF"):
-            erro = sp - pv; 
-            pv = a1*pv+ b1*erro; 
+            pv = calculos.malha_fechada(sp,pv,a1,b1)
         elif(modo=="PID" or modo=="Sint"):
-            erro = sp - pv
-            acaoProporcional = kp * erro
-            acaoIntegral = acaoIntegral + ki*ts*erro
-            acaoDerivativa = ((erro - erroAnterior)/ts)*kd
-            acaoControlador = acaoProporcional + acaoIntegral + acaoDerivativa
-            pv = a1*pv + b1*acaoControlador
-            erroAnterior = erro
+            pv,acaoIntegral,erroAnterior = calculos.pid(sp,pv,a1,b1,kp,ki,kd,ts,acaoIntegral,erroAnterior)
         else:
             modo = '-'
+        #TEMPO DE ACOMODAÇÃO:
         if(pv > sp*1.02):  # pv>51 (+2% de variação do valor setado)
             tempo_acomodacao = 0
         elif (pv < sp*0.98):  # pv<49 (-2% de variação do valor setado)
@@ -92,28 +82,34 @@ def plot(modo, a1, b1, ts, sp, kp, ki, kd, fs, ps, os,tm,k,tal):
         elif(tempo_acomodacao == 0):
             tempo_acomodacao = tempo
         tempo = tempo+ts
+        
+    #GRÁFICO  
     fig, ax = plt.subplots()
     plt.xlim(xmin=0.0, xmax=tempo)
-    # plt.xlim(xmin=0.0,xmax=350)
-
-    if fs:
+    if fs: #se a escala for fixa, limita ymax em 120% de sp
         plt.ylim(ymin=0.0, ymax=sp*1.2)
-    ax.plot(vetT, vetY, color='darkblue', label="Calculado")
+    if(modo=="Comparação"):
+        ax.plot(vetT, vetYMA, color='darkorange', label="Malha Aberta")
+        ax.plot(vetT, vetYMF, color='forestgreen', label="Malha Fechada")
+        ax.plot(vetT, vetY, color='darkblue', label="PID")
+        ax.legend()
+    else:
+        ax.plot(vetT, vetY, color='darkblue', label="Calculado")
     ax.set(xlabel='Tempo[s]', ylabel='Nível[mm]')
     if(ps):
         ax.plot(vetT, samples, color='crimson', label="Amostras")
         ax.legend()
     ax.grid()
     plt.subplots_adjust(top=0.95,)
+    #CÁLCULO OVERSHOOT
     pico = max(vetY)
     overshoot = (pico-sp)/sp*100
     if (overshoot<0): 
         overshoot=0
-
     timestamp = str(int(time.time()*1000.0))
     name_image = "./tmp/Results"+timestamp+".png"
     fig.savefig(name_image)
-
+    
     Html = create_table(modo, a1, b1, sp, kp, ki, kd,
                         pico,os, overshoot, tm,tempo_acomodacao)
     return Html, timestamp
