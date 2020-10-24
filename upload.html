@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Projeto de C213 - Simulador de controle PID">
+  <meta name="author" content="Anderson, Mariana e Sinara">
+  <title>C213</title>
+  <link href="/static/bootstrap.min.css" rel="stylesheet">
+  <script src="/static/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="/static/jquery-3.5.1.slim.min.js"><\/script>')</script>
+  <script src="/static/bootstrap.bundle.min.js"></script>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/jumbotron/">
+  <link href="/static/jumbotron.css" rel="stylesheet">
+  <style>
+    .bd-placeholder-img 
+    {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    @media (min-width: 768px) 
+    {
+      .bd-placeholder-img-lg 
+      {
+        font-size: 3.5rem;
+      }
+    }
+    h3
+    {
+      color: #007bff;
+    }
+    label
+    {
+      text-align: left;
+      width: 400px;
+    }
+    input, button
+    {
+      width: 200px;
+    }
+    .form
+    {
+      height: 500px;
+      background-color: #f5f5f5;
+      padding: 10px;
+    }
+    .selectFile
+    {
+      padding-left: 60px;
+      float: left;
+    }
+    #simular
+    {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+    }
+    #importar
+    {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+      display: inline-block;
+      font-weight: 400;
+      border: 1px solid transparent;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+    }
+    #importar:hover
+    {
+      background-color:#026dde
+    }
+    #select
+    {
+      width: 400px;
+      margin-bottom: 30px;
+      height: 270px;
+    }
+    #label-select
+    {
+      text-align: left;
+      width: 400px;
+      margin-top: 20px;
+    }
+    #nome,#sp,#ts
+    {
+      margin-left: 60px;
+      float: left;
+    }
+    #mensagem
+    {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="height: 44px;">
+    <a class="navbar-brand" href="./"><img src="/static/logo-gray.png" alt="logo" width="50%" height="50%"> </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Barra de navegação -->
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/control/"> Sistemas de Controle </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/import/" tabindex="-1" aria-disabled="true"> Importar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/howtouse/" tabindex="-1" aria-disabled="true"> Como usar</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Membros</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="#">Anderson Andre Palma</a>
+            <a class="dropdown-item" href="#">Mariana Helena Ines Moreira</a>
+            <a class="dropdown-item" href="#">Sinara Pimenta Medeiros</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Conteúdo da página -->
+  <main role="main">
+    <div class="container">
+      <div class="row" div style="text-align: center;">
+        <div class="col-xl-6 align-center">
+          <!-- Campos para upload da amostra no BD-->
+          <div class="form">
+          <h3>Upload de uma nova amostra</h3>
+          <br>
+          <!-- Utiliza-se o método post para capturar as entradas e o arquivo de modo que essas possam ser processadas -->
+          <!-- O processamento é feito no arquivo  server.py após o submit (clicar no botão Upload)-->
+          <form method=post enctype=multipart/form-data>
+            <label for="nome"> Nome da amostra: </label>
+            <br>
+            <input type=text id="nome" name="NAME">
+            <br>
+            <br>
+            <label for="sp"> Setpoint: </label>
+            <br>
+            <input type=text id="sp" name="SP">
+            <br>
+            <br>
+            <label for="ts"> Tempo de amostragem: </label>
+            <br>
+            <input type=text id="ts" name="TS">
+            <br>
+            <br>
+            <br>
+            <!-- É permitido apenas importar arquivos no formato txt-->
+            <input type=file name=file class="selectFile" accept=".txt">
+            <br>
+            <br>
+            <br>
+            <input type=submit value=Upload class="text-center btn btn-primary">
+          </form>
+        </div>
+      </div>
+      <!-- Seção para exibir as amostras salvas no BD-->
+      <!-- A renderização é feita no arquivo python, pois a exibição está atrelada ao resultado da busca no BD-->
+      <div class="col-xl-6 align-center">
+        <div class="form">
+        <h3>Importar amostra existente</h3>
+        <form method=post enctype=multipart/form-data>
+            <label id="label-select">Selecione a amostra desejada:</label>
+            <br>table_placeholder  <!-- Aqui será inserido a lista de amostras-->
+            <!-- A mensagem a seguir aparece somente quando uma amostra é escolhida -->
+            <!-- 'amostraX' será subtituido pelo nome da amostra selecionada -->
+            <p style="display: none;" id="mensagem">A amostraX esta pronta para ser simulada!</p>
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- O botão simular é usado para redirecionar para a página 'control', porém informando o nome da amostra
+    escolhida para simulação.
+    Ou seja, para que na página control seja possível realizar a simulação de uma amostra salva no BD,
+    é necessário selecionar a amostra nessa página  e clicar no botão simular 
+    Caso contrário, a simulação é feita com a amostra denominada padrão.
+    -->
+    <div id="simular">
+      <button class="text-center btn btn-primary" id="simular"> Simular </button>
+      <script type="text/javascript">
+          document.getElementById("simular").onclick = function () {
+              location.href = "/control/?nome="+"nome_amostra";
+          };
+      </script>
+    </div>
+    <footer class=".container ">
+      <p class="text-center">&copy; ASM Sistemas de Controle (Build 20201013 - 2300)</p>
+    </footer>
+</html>

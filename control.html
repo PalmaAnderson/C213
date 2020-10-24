@@ -1,26 +1,18 @@
 <!doctype html>
-<html lang="en">
-
+<html>
 <head>
   <meta charset="utf-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v4.1.1">
   <title>C213</title>
-
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/jumbotron/">
-
-  <!-- Bootstrap core CSS -->
   <link href="/static/bootstrap.min.css" rel="stylesheet">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/jumbotron/">
   <script src="/static/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
   <script>window.jQuery || document.write('<script src="/static/jquery-3.5.1.slim.min.js"><\/script>')</script>
   <script src="/static/bootstrap.bundle.min.js"></script>
-
-  <!-- Custom styles for this template -->
   <link href="/static/jumbotron.css" rel="stylesheet">
-
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -30,85 +22,33 @@
       -ms-user-select: none;
       user-select: none;
     }
-
     @media (min-width: 768px) {
       .bd-placeholder-img-lg {
         font-size: 3.5rem;
       }
     }
-
-    .vl {
-      /* border-left: 6px solid darkslategrey; */
-      border-left: 8px solid rgb(52, 58, 64);
-      height: 560px;
-      position: absolute;
-      left: 50%;
-      margin-left: -3px;
-      top: 0;
-    }
-
     table {
       font-family: arial, sans-serif;
       border-collapse: collapse;
       width: 100%;
     }
-
-    td,
-    th {
+    td,th {
       border: 1px solid #dddddd;
       text-align: left;
       padding: 8px;
     }
-
-    tr:nth-child(even) {
-      /* background-color: #dddddd; */
-    }
-
-    .darkgraybackground {
-      background-color: rgb(55, 60, 65);
-    }
-
-    .mediumgraybackground {
-      background-color: rgb(100, 105, 110);
-    }
-
-    .lightgraybackground {
-      background-color: rgb(160, 170, 180);
-    }
-
-    .white {
-      color: #ffffff;
-    }
-
     .c1 {
       background-color: #333337;
     }
-
     .c2 {
       background-color: #4D4D50;
     }
-
-    .c3 {
-      background-color: #646569;
-    }
-
-    .c4 {
-      background-color: #808082;
-    }
-
     .c5 {
       background-color: #99999B;
     }
-
     .c6 {
       background-color: crimson;
     }
-
-
-    .progress {
-      transform: rotate(-90deg);
-    }
-
     .form-control {
       height: 25px;
     }
@@ -116,31 +56,25 @@
       display: none;
     }
   </style>
-
 </head>
-
 <body>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="height: 44px;">
-    <!--<a class="navbar-brand" href="#">Tournament Life Indicator</a> -->
     <a class="navbar-brand" href="./"><img src="/static/logo-gray.png" alt="logo" width="50%" height="50%"> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
       aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
+    <!-- Barra de navegação -->
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#"> Sistemas de Controle <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/control/"> Sistemas de Controle </a>
         </li>
         <li class="nav-item">
-          <!-- <a class="nav-link" href="/prolabs"> C213 </a> -->
+          <a class="nav-link" href="/import/" tabindex="-1" aria-disabled="true"> Importar</a>
         </li>
         <li class="nav-item">
-          <!-- <a class="nav-link" href="/nscreen"> Tournament </a> -->
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"> How to use</a>
+          <a class="nav-link" href="/howtouse/" tabindex="-1" aria-disabled="true"> Como usar</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
@@ -152,44 +86,24 @@
           </div>
         </li>
       </ul>
-
     </div>
   </nav>
-
-
+  <!-- Conteúdo da página -->
   <main role="main">
     <div class="container">
       <div class="row" div style="text-align: center;">
-
+        <!-- Campos de entrada dos parâmetros necessários para simulação -->
         <div class="col-xl-2 align-center">
-
+          <!-- Utiliza-se o método get para capturar as entradas, adicionando valores a url -->
           <form method="GET" action="/control/">
-            <!--
-            <div class="text-left">
-              <div class="radio">
-                <label><input type="radio" name="optradio" checked>Controle P</label>
-              </div>
-              <div class="radio">
-                <label><input type="radio" name="optradio">Controle PI</label>
-              </div>
-              <div class="radio disabled">
-                <label><input type="radio" name="optradio" disabled>Controle PID</label>
-              </div>
-            </div>
-          -->
           <h5 class="text-center">Modo:</h5>
           <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
-
             <label class="btn btn-primary c1 btn-sm">
               <input type="radio" name="Modo" value="MA" id="MA" onclick="handleClickM();">MA
             </label>
-
-
             <label class="btn btn-primary  c2 btn-sm">
               <input type="radio" name="Modo" value="MF" id="MF" onclick="handleClickM();"> MF
             </label>
-
-
             <label class="btn btn-primary  c5 btn-sm">
               <input type="radio" name="Modo" value="PID" id="PID" onclick="handleClickPID();"> PID
             </label>
@@ -197,7 +111,7 @@
             <label class="btn btn-primary c6 btn-sm">
               <input type="radio" name="Modo" value="Sint" id="Sint" onclick="handleClickSint();"> Sint
             </label>
-
+             <!-- Funções em javascript para renderização condicional, de acordo com o modo selecionado -->
             <script>
               function handleClickM() {
                 document.getElementById("label-kp").style.display = "none";
@@ -228,55 +142,34 @@
                 document.getElementById("label-tal").style.display = "block";
                 document.getElementById("input-k").style.display = "block";
                 document.getElementById("input-tal").style.display = "block";
-
                 document.getElementById("label-kp").style.display = "none";
                 document.getElementById("label-ki").style.display = "none";
                 document.getElementById("label-kd").style.display = "none";
                 document.getElementById("input-kp").style.display = "none";
                 document.getElementById("input-ki").style.display = "none";
                 document.getElementById("input-kd").style.display = "none";
-
               }
             </script>
-
           </div>
             <div class="form-group">
-
               A1:<input type="text" class="form-control" name="A1" value="0.9930900">
               B1:<input type="text" class="form-control" name="B1" value="0.0058096">
-
               Tempo Amostragem:<input type="text" class="form-control" name="Amostragem" value="0.3">
               Setpoint:<input type="text" class="form-control" name="SetPoint" value="50">
               Overshoot MAX:<input type="text" class="form-control" name="Overshoot" value="15">
               Tempo MAX:<input type="text" class="form-control" name="tempo" value="60">
-
-              <!-- Ganho Proporcional:<input type="text" class="form-control" name="Proporcional" placeholder="0"> -->
-              <!-- Ganho Integral:<input type="text" class="form-control" name="Integral" placeholder="0"> -->
-              <!-- Ganho Derivativo:<input type="text" class="form-control" name="Derivativo" placeholder="0"> -->
               <label id="label-kp" >KP:</label>
               <input type="text" id="input-kp" class="form-control" name="Proporcional" value="kp">
               <label id="label-ki" >KI:</label>
               <input type="text" id="input-ki" class="form-control" name="Integral" value="ki">
               <label id="label-kd" >KD:</label>
               <input type="text" id="input-kd" class="form-control" name="Derivativo" value="kd">
-            
               <label id="label-k" >K:</label>
-              <input type="text" id="input-k" class="form-control" name="k" value="k">
+              <input type="text" id="input-k" class="form-control" name="k" value="valork">
               <label id="label-tal" >Tal:</label>
-              <input type="text" id="input-tal" class="form-control" name="tal" value="tal">
-
-
+              <input type="text" id="input-tal" class="form-control" name="tal" value="valortal">
               <div style="text-align: center;">
-                <!-- <h4 class="text-center">Modo</h4> -->
-                <div class=".container">
-                  
-                  
-                  
-
-
-                </div>
               </div>
-              <!-- <button type="submit" class="btn btn-primary" onclick="show_graph()" >Run</button> -->
             </br>
               <div class=".container">
                 <input type="submit" class="text-center btn btn-primary" value="Calcular">
@@ -287,45 +180,33 @@
                   window.history.back();
                 }
               </script>
-
-              <!-- <button type="button" class="text-center btn btn-primary" onclick="show_graph()">Simular</button> -->
             </div>
-
-
-
         </div>
-
         <div class="col-xl-1">
-          <!-- <div class="vl"></div> -->
         </div>
-
         <div class="col-xl-7">
-
           <h4 class="text-center">Resultados</h4>
           <img class="img-fluid" src="/tmp/Results.png">
-
+           <!-- Exibição da imagem do gráfico -->
           <input class="form-check-input" type="checkbox" value="1" name="fixed_scale" id="fixed_scale" checked>
+           <!-- Campos para exibição especial (escala do gráfico, exibição de amostras e comparação) -->
           <label class="form-check-label" for="fixed_scale"> Escala Fixa
             &ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;</label>
           <input class="form-check-input" type="checkbox" value="1" name="plot_sample" id="plot_sample">
           <label class="form-check-label" for="plot_sample"> Exibir Amostras  &ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;</label>
           <input class="form-check-input" type="checkbox" value="1" name="plot_all" id="plot_all">
           <label class="form-check-label" for="plot_all"> Comparar Modos </label>
-
         </div>
         </form>
+        <!-- Local onde a tabela de resultados será inserida -->
+        <!-- A tabela é gerada dentro do arquivo python tabela.py -->
         <div class="col-xl-2  ">
           <br><br>table_placeholder
         </div>
-
       </div>
     </div>
     </div>
-
     <footer class=".container ">
-      <!-- d-lg-none -->
-      <!-- <hr style="height:8px;border-width:0;color: rgb(52, 58, 64);background-color: rgb(52, 58, 64)"> -->
       <p class="text-center">&copy; ASM Sistemas de Controle (Build 20201013 - 2300)</p>
     </footer>
-
 </html>
