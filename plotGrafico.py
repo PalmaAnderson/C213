@@ -75,7 +75,7 @@ def plot(modo, a1, b1, ts, sp, kp, ki, kd, fs, ps, pa, os,tm,k,tal,samples,nome)
         ax.plot(vetT, vetY, color='darkblue', label="Calculado")
     ax.set(xlabel='Tempo[s]', ylabel='Nível[mm]')
     if(ps):
-        ax.plot(vetT, samples, color='crimson', label="Amostras")
+        ax.plot(vetT, samples[0:size-1], color='crimson', label="Amostras")
         ax.legend()
     ax.grid()
     plt.subplots_adjust(top=0.95,)

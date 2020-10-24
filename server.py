@@ -8,6 +8,7 @@ import plotGrafico
 ALLOWED_EXTENSIONS = {'txt'}
 app = Flask(__name__)
 LastSP=999
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 
 
 #Variáveis globais
 pv = []
