@@ -5,10 +5,10 @@ from flask import  flash,  redirect, url_for
 from werkzeug.utils import secure_filename
 import plotGrafico
 
-ALLOWED_EXTENSIONS = {'txt'}
 app = Flask(__name__)
 LastSP=999
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 
+ALLOWED_EXTENSIONS = {'txt'}
 
 #Variáveis globais
 pv = []
@@ -208,4 +208,5 @@ def send_file(path):
     return send_from_directory('tmp', path)
 
 if __name__ == '__main__':
-  app.run(debug=True)      
+    app.run(debug=True)                    #Localhost
+    #app.run(host= '0.0.0.0',debug=True)   #Public

@@ -1,11 +1,6 @@
-import matplotlib
-import time
+import matplotlib, time, re, calculos, database, tabela
 import matplotlib.pyplot as plt
 import numpy as np
-import re
-import calculos
-import database
-import tabela
 
 def plot(modo, a1, b1, ts, sp, kp, ki, kd, fs, ps, pa, os,tm,k,tal,samples,nome):
     #Caso não tenha sido importada uma amostra para simulação
