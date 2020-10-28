@@ -13,8 +13,12 @@ Codigos para execução de Calculos, Interface e Controle de Hardware para a dis
 ### Info:
 Este projeto pode ser enviado diretamente ao Heroku.
 
-Para executar localmente, utilize o script **Server.py**
+Para executar localmente, utilize o script **Server.py**  
+Para utilizar a versão web, acesse:  
+https://c213-control.herokuapp.com/control/
 
+(este link sera mantido online conforme a nescessidade)
 
+### Exemplo de Graficos e tabela de resultados:
 ![alt text](static/resultados.png)
 
